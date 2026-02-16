@@ -1,9 +1,5 @@
 package com.gmail.astroidchannel;
 
-import com.gmail.astroidchannel.membershipFunctions.MembershipFunction;
-import com.gmail.astroidchannel.membershipFunctions.TrapezoidalFunction;
-import com.gmail.astroidchannel.membershipFunctions.TriangularFunction;
-
 public class Main {
     public static void main(String[] args) {
 //        MembershipFunction triangularFunction = new TriangularFunction(2, 4, 7);

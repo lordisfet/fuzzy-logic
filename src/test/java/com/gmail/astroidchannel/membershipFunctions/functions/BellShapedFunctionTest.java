@@ -1,6 +1,6 @@
-package com.gmail.astroidchannel.membershipFunctions;
+package com.gmail.astroidchannel.membershipFunctions.functions;
 
-import org.junit.jupiter.api.Test;
+import com.gmail.astroidchannel.membershipFunctions.MembershipFunction;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 

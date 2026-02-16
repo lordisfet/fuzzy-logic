@@ -1,10 +1,9 @@
-package com.gmail.astroidchannel.membershipFunctions;
+package com.gmail.astroidchannel.membershipFunctions.functions;
 
-import com.gmail.astroidchannel.membershipFunctions.TriangularFunction;
+import com.gmail.astroidchannel.membershipFunctions.MembershipFunction;
 import org.junit.jupiter.api.Test;
 
 import static com.gmail.astroidchannel.LinguisticVariable.EPS;
-import static com.gmail.astroidchannel.membershipFunctions.curvesTypes.CurveCalculation.*;
 import static org.junit.jupiter.api.Assertions.*;
 class TriangularFunctionTest {
 

@@ -1,5 +1,6 @@
-package com.gmail.astroidchannel.membershipFunctions;
+package com.gmail.astroidchannel.membershipFunctions.functions;
 
+import com.gmail.astroidchannel.membershipFunctions.MembershipFunction;
 import com.gmail.astroidchannel.membershipFunctions.curvesTypes.TransitionCurve;
 import com.gmail.astroidchannel.membershipFunctions.curvesTypes.CurveCalculation;
 import com.google.common.collect.Range;

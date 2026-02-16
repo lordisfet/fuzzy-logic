@@ -1,5 +1,6 @@
-package com.gmail.astroidchannel.membershipFunctions;
+package com.gmail.astroidchannel.membershipFunctions.functions;
 
+import com.gmail.astroidchannel.membershipFunctions.MembershipFunction;
 import org.junit.jupiter.api.Test;
 
 import static com.gmail.astroidchannel.LinguisticVariable.EPS;

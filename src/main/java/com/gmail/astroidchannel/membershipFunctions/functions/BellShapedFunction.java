@@ -1,9 +1,10 @@
-package com.gmail.astroidchannel.membershipFunctions;
+package com.gmail.astroidchannel.membershipFunctions.functions;
 
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import com.gmail.astroidchannel.membershipFunctions.MembershipFunction;
 import com.gmail.astroidchannel.membershipFunctions.curvesTypes.TransitionCurve;
 import com.google.common.collect.Range;
 
