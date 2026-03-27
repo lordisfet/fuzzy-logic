@@ -9,8 +9,7 @@ import java.util.Objects;
 public class LinguisticVariable {
     public static final double EPS = 0.00001;
     private String name;
-    private double
-            leftBorder;
+    private double leftBorder;
     private double rightBorder;
     private Map<String, MembershipFunction> terms = new HashMap<>();
 
@@ -24,12 +23,14 @@ public class LinguisticVariable {
         this.name = name;
         this.leftBorder = leftBorder;
         this.rightBorder = rightBorder;
-        this.terms = new HashMap<>(terms);}
+        this.terms = new HashMap<>(terms);
+    }
 
     public LinguisticVariable(LinguisticVariable other) {
         this.name = other.name;
         this.leftBorder = other.leftBorder;
-        this.rightBorder = other.rightBorder;this.terms = new HashMap<>(other.terms);
+        this.rightBorder = other.rightBorder;
+        this.terms = new HashMap<>(other.terms);
     }
 
     public double getLeftBorder() {
