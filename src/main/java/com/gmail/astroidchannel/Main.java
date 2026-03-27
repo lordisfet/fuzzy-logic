@@ -1,6 +1,9 @@
 package com.gmail.astroidchannel;
 
-public class Main {
+public final class Main {
+    private Main() {
+        throw new IllegalStateException("Utility class");
+    }
     public static void main(String[] args) {
 //        MembershipFunction triangularFunction = new TriangularFunction(2, 4, 7);
 //        MembershipFunction trapezoidalFunction = new TrapezoidalFunction(1, 3, 5,8);
