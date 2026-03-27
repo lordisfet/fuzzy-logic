@@ -62,7 +62,7 @@ public class LinguisticVariable {
     }
 
     public void setTerms(Map<String, MembershipFunction> terms) {
-        this.terms = terms;
+        this.terms = new HashMap<>(terms);
     }
 
     @Override

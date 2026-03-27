@@ -88,7 +88,7 @@ public class TriangularFunction implements MembershipFunction {
 
     @Override
     public double calculate(double x) {
-        if (Double.compare(x, a) == 0) {
+        if (Double.compare(x,b) == 0) {
             return 1;
         }
         if (Double.compare(x, a) <= 0) {
