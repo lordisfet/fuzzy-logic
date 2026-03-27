@@ -2,7 +2,10 @@ package com.gmail.astroidchannel.membershipFunctions.curvesTypes;
 
 import static java.lang.Math.*;
 
-public class CurveCalculation {
+public final class CurveCalculation {
+    private CurveCalculation() {
+        throw new IllegalStateException("Utility class");
+    }
     public static TransitionCurve getLinear(double a, double b) {
         return t -> (t - a) / (b - a);
     }
