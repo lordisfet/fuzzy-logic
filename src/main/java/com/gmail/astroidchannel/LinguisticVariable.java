@@ -6,6 +6,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Represents a linguistic variable in the fuzzy inference system.
+ *
+ * A linguistic variable characterizes a physical or abstract concept (e.g., "Temperature")
+ * using fuzzy sets (e.g., "Cold", "Warm", "Hot"). This class holds the definitions
+ * of these sets and maps crisp numerical inputs to fuzzy membership degrees.
+ *
+ * @author lordisfet
+ * @version 1.0
+ */
 public class LinguisticVariable {
     public static final double EPS = 0.00001;
     private String name;
@@ -13,12 +23,36 @@ public class LinguisticVariable {
     private double rightBorder;
     private Map<String, MembershipFunction> terms = new HashMap<>();
 
+    /**
+     * Базовий конструктор для ініціалізації порожньої лінгвістичної змінної.
+     *
+     * Бізнес-контекст: Використовується на етапі конфігурації рушія нечіткої логіки
+     * (на Backend-сервері) для створення нових концептів (наприклад, "Рівень аміаку"),
+     * до яких згодом будуть додані математичні терміни через метод {@code addTerms}.
+     *
+     * @param name Назва лінгвістичної змінної (наприклад, "Temperature").
+     * @param leftBorder Мінімальне можливе фізичне значення для цієї змінної.
+     * @param rightBorder Максимальне можливе фізичне значення для цієї змінної.
+     */
     public LinguisticVariable(String name, double leftBorder, double rightBorder) {
         this.name = name;
         this.leftBorder = leftBorder;
         this.rightBorder = rightBorder;
     }
 
+    /**
+     * Конструктор для ініціалізації лінгвістичної змінної з готовим набором термінів.
+     *
+     * NFR (Безпека та Потокобезпечність): Конструктор виконує захисне копіювання
+     * (defensive copy) переданої мапи термінів. Це гарантує незмінність (immutability)
+     * внутрішнього стану змінної, якщо зовнішній потік спробує модифікувати
+     * оригінальну колекцію під час конкурентної обробки телеметрії від MESH-мережі.
+     *
+     * @param name Назва лінгвістичної змінної.
+     * @param leftBorder Мінімальна межа фізичного показника.
+     * @param rightBorder Максимальна межа фізичного показника.
+     * @param terms Мапа готових лінгвістичних термінів та їхніх функцій належності.
+     */
     public LinguisticVariable(String name, double leftBorder, double rightBorder, Map<String, MembershipFunction> terms) {
         this.name = name;
         this.leftBorder = leftBorder;
@@ -26,6 +60,16 @@ public class LinguisticVariable {
         this.terms = new HashMap<>(terms);
     }
 
+    /**
+     * Конструктор копіювання (Copy Constructor).
+     *
+     * Архітектурне призначення: Дозволяє швидко клонувати існуючу конфігурацію
+     * змінної (наприклад, еталонні налаштування мікроклімату для одного пташника)
+     * для ізольованого використання в інших екземплярах рушія висновку без ризику
+     * перехресного забруднення стану (cross-contamination).
+     *
+     * @param other Об'єкт лінгвістичної змінної, який потрібно скопіювати.
+     */
     public LinguisticVariable(LinguisticVariable other) {
         this.name = other.name;
         this.leftBorder = other.leftBorder;
@@ -87,10 +131,38 @@ public class LinguisticVariable {
                 '}';
     }
 
+    /**
+     * Додає лінгвістичний термін та його функцію належності до цієї змінної.
+     *
+     * Бізнес-логіка: Лінгвістична змінна (наприклад, "Температура") складається з множини
+     * термінів (наприклад, "Норма", "Спекотно"). Цей метод пов'язує зрозумілу для людини
+     * назву терміну з її математичною моделлю (функцією належності), яка безпосередньо
+     * визначає геометричну форму нечіткої множини.
+     *
+     * @param termName Назва лінгвістичного терміну (наприклад, "Критичний_рівень").
+     * @param membershipFunction Математична функція (наприклад, трикутна або трапецієподібна),
+     *                           що розраховує ступінь належності для цього терміну.
+     */
     public void addTerms(String termName, MembershipFunction membershipFunction) {
         terms.put(termName, membershipFunction);
     }
 
+    /**
+     * Перетворює чітке числове значення (crisp value) на нечітку множину (fuzzy set),
+     * розраховуючи ступінь належності для всіх зареєстрованих термінів.
+     *
+     * Математичний апарат: Це етап фазифікації, який трансформує реальні фізичні показники
+     * (наприклад, дані з сенсорів) у нечіткі значення для подальшого використання
+     * в механізмі логічного висновку ``.
+     *
+     * NFR (Оптимізація ресурсів): Щоб уникнути виснаження пам'яті (Heap Exhaustion) та
+     * пришвидшити обробку правил, терміни зі ступенем належності $\mu(x)$, меншим або
+     * рівним математичній похибці (EPS), вважаються нульовими і свідомо відкидаються.
+     *
+     * @param value Чітке числове значення для фазифікації (наприклад, показник 28.5).
+     * @return Мапа, що містить лише активні лінгвістичні терміни (ключі) та їхні
+     *         відповідні ступені належності (значення строго більші за EPS).
+     */
     public Map<String, Double> fuzzify(double value) {
         Map<String, Double> result = new HashMap<>();
 

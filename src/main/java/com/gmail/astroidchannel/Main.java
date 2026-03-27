@@ -1,17 +1,29 @@
 package com.gmail.astroidchannel;
 
+/**
+ * Головний клас-точка входу (Entry Point) для мікросервісу нечіткої логіки.
+ *
+ * Бізнес-контекст: Згідно з архітектурою системи моніторингу мікроклімату,
+ * цей модуль є частиною Backend Server (Java 21 / Spring Boot 3.x).
+ * Цей клас відповідає за ініціалізацію та запуск серверного середовища,
+ * яке оброблятиме вхідні потоки даних від MESH-мережі (Edge gateways)
+ * та прийматиме рішення щодо активації систем тривоги (AVAS або Telegram).
+ */
 public final class Main {
+    /**
+     * Приватний конструктор для запобігання інстанціюванню утилітного класу.
+     * NFR: Захищає пам'ять від створення непотрібних об'єктів.
+     */
     private Main() {
         throw new IllegalStateException("Utility class");
     }
+    /**
+     * Головний метод для запуску програми.
+     *
+     * @param args Аргументи командного рядка (наприклад, параметри конфігурації
+     *             для підключення до бази даних PostgreSQL).
+     */
     public static void main(String[] args) {
-//        MembershipFunction triangularFunction = new TriangularFunction(2, 4, 7);
-//        MembershipFunction trapezoidalFunction = new TrapezoidalFunction(1, 3, 5,8);
-//        for (int i = -5; i < 10; i++) {
-//            System.out.println(i + "   " + trapezoidalFunction.calculate(i));
-//            if (i == 6) {
-//                System.out.println("my   " + trapezoidalFunction.calculate(6.8));
-//            }
-//        }
+
     }
 }
