@@ -10,7 +10,6 @@ package com.gmail.astroidchannel;
  * та прийматиме рішення щодо активації систем тривоги (AVAS або Telegram).
  */
 public final class Main {
-
     /**
      * Приватний конструктор для запобігання інстанціюванню утилітного класу.
      * NFR: Захищає пам'ять від створення непотрібних об'єктів.
@@ -18,14 +17,13 @@ public final class Main {
     private Main() {
         throw new IllegalStateException("Utility class");
     }
-
     /**
      * Головний метод для запуску програми.
      *
      * @param args Аргументи командного рядка (наприклад, параметри конфігурації
      *             для підключення до бази даних PostgreSQL).
      */
-    public static void main(String args) {
+    public static void main(String[] args) {
 
     }
 }
