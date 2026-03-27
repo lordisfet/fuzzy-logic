@@ -23,12 +23,36 @@ public class LinguisticVariable {
     private double rightBorder;
     private Map<String, MembershipFunction> terms = new HashMap<>();
 
+    /**
+     * Базовий конструктор для ініціалізації порожньої лінгвістичної змінної.
+     *
+     * Бізнес-контекст: Використовується на етапі конфігурації рушія нечіткої логіки
+     * (на Backend-сервері) для створення нових концептів (наприклад, "Рівень аміаку"),
+     * до яких згодом будуть додані математичні терміни через метод {@code addTerms}.
+     *
+     * @param name Назва лінгвістичної змінної (наприклад, "Temperature").
+     * @param leftBorder Мінімальне можливе фізичне значення для цієї змінної.
+     * @param rightBorder Максимальне можливе фізичне значення для цієї змінної.
+     */
     public LinguisticVariable(String name, double leftBorder, double rightBorder) {
         this.name = name;
         this.leftBorder = leftBorder;
         this.rightBorder = rightBorder;
     }
 
+    /**
+     * Конструктор для ініціалізації лінгвістичної змінної з готовим набором термінів.
+     *
+     * NFR (Безпека та Потокобезпечність): Конструктор виконує захисне копіювання
+     * (defensive copy) переданої мапи термінів. Це гарантує незмінність (immutability)
+     * внутрішнього стану змінної, якщо зовнішній потік спробує модифікувати
+     * оригінальну колекцію під час конкурентної обробки телеметрії від MESH-мережі.
+     *
+     * @param name Назва лінгвістичної змінної.
+     * @param leftBorder Мінімальна межа фізичного показника.
+     * @param rightBorder Максимальна межа фізичного показника.
+     * @param terms Мапа готових лінгвістичних термінів та їхніх функцій належності.
+     */
     public LinguisticVariable(String name, double leftBorder, double rightBorder, Map<String, MembershipFunction> terms) {
         this.name = name;
         this.leftBorder = leftBorder;
@@ -36,6 +60,16 @@ public class LinguisticVariable {
         this.terms = new HashMap<>(terms);
     }
 
+    /**
+     * Конструктор копіювання (Copy Constructor).
+     *
+     * Архітектурне призначення: Дозволяє швидко клонувати існуючу конфігурацію
+     * змінної (наприклад, еталонні налаштування мікроклімату для одного пташника)
+     * для ізольованого використання в інших екземплярах рушія висновку без ризику
+     * перехресного забруднення стану (cross-contamination).
+     *
+     * @param other Об'єкт лінгвістичної змінної, який потрібно скопіювати.
+     */
     public LinguisticVariable(LinguisticVariable other) {
         this.name = other.name;
         this.leftBorder = other.leftBorder;
