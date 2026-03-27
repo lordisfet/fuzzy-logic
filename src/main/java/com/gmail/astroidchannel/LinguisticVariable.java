@@ -23,7 +23,7 @@ public class LinguisticVariable {
         this.name = name;
         this.leftBorder = leftBorder;
         this.rightBorder = rightBorder;
-        this.terms = terms;
+        this.terms = new HashMap<>(terms);
     }
 
     public LinguisticVariable(LinguisticVariable other) {
